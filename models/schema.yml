@@ -44,6 +44,15 @@ sources:
             description: the cost of preparing the parcel in the warehouse
           - name: ship_cost
             description: the shipping cost paid by Greenweez to the carrier
+      - name: adwords
+        identifier: raw_gz_adwords
+      - name: bing
+        identifier: raw_gz_bing
+      - name: criteo
+        identifier: raw_gz_criteo
+      - name: facebook
+        identifier: raw_gz_facebook
+
 
 models:
   - name: int_sales_margin
@@ -79,3 +88,19 @@ models:
         description: Operational margin = margin + shipping fee - log_cost - ship_cost
   - name: finance_days
     description: finance calculation per days
+  - name: int_campaigns
+    description: to union everything
+  - name: int_campaigns_day
+    description: the union for jobs
+  - name: finance_campaigns_day
+    description: global kpi
+    columns:
+      - name: ads_margin
+        description: operational_margin - ads_cost
+      - name: average_basket
+        description: average basket cost for each day 
+    tests:
+      - not_null:
+          column_name:
+            - ads_margin
+            - average_basket
